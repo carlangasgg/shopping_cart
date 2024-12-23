@@ -6,6 +6,7 @@ class ProductModel extends Equatable {
   final double price;
   final String imageUrl;
   final int quantity;
+  final double priceQuantity;
 
   const ProductModel({
     required this.id,
@@ -13,6 +14,7 @@ class ProductModel extends Equatable {
     required this.price,
     required this.imageUrl,
     this.quantity = 1,
+    required this.priceQuantity,
   });
 
   ProductModel copyWith({
@@ -21,13 +23,15 @@ class ProductModel extends Equatable {
     double? price,
     String? imageUrl,
     int? quantity,
+    double? priceQuantity,
   }) {
     return ProductModel(
         id: id ?? this.id,
         name: name ?? this.name,
         price: price ?? this.price,
         imageUrl: imageUrl ?? this.imageUrl,
-        quantity: quantity ?? this.quantity);
+        quantity: quantity ?? this.quantity,
+        priceQuantity: priceQuantity ?? this.priceQuantity);
   }
 
   @override
@@ -37,5 +41,6 @@ class ProductModel extends Equatable {
         price,
         imageUrl,
         quantity,
+        priceQuantity,
       ];
 }

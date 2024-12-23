@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shopping_cart/data.dart';
@@ -28,6 +26,7 @@ class EcommerceBloc extends Bloc<EcommerceEvent, EcommerceState> {
         name: json["description"],
         price: double.parse(json["price"].toString()),
         imageUrl: json["image_url"],
+        priceQuantity: double.parse(json["price"].toString()),
       );
     }).toList();
 
@@ -47,7 +46,9 @@ class EcommerceBloc extends Bloc<EcommerceEvent, EcommerceState> {
 
     final updateCart = state.cart.map((p) {
       if (p.id == event.product.id) {
-        return p.copyWith(quantity: p.quantity + 1);
+        return p.copyWith(
+            quantity: p.quantity + 1,
+            priceQuantity: (p.quantity + 1) * p.price);
       }
       return p;
     }).toList();
@@ -73,7 +74,9 @@ class EcommerceBloc extends Bloc<EcommerceEvent, EcommerceState> {
 
     final updateCart = state.cart.map((p) {
       if (p.id == event.product.id) {
-        return p.copyWith(quantity: p.quantity - 1);
+        return p.copyWith(
+            quantity: p.quantity - 1,
+            priceQuantity: (p.quantity - 1) * p.price);
       }
       return p;
     }).toList();
