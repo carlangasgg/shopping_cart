@@ -52,7 +52,7 @@ class Body extends StatelessWidget {
                 ),
               ),
               Text(
-                "Grove Street, Los Santos",
+                "Grove Street, Ganton, Los Santos.",
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: 12,

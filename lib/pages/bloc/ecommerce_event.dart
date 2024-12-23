@@ -22,3 +22,9 @@ class RemoveToCartEvent extends EcommerceEvent {
 
   const RemoveToCartEvent({required this.product});
 }
+
+class RemoveElementEvent extends EcommerceEvent {
+  final ProductModel product;
+
+  const RemoveElementEvent({required this.product});
+}

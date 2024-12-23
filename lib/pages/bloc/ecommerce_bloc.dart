@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shopping_cart/data.dart';
@@ -12,6 +14,7 @@ class EcommerceBloc extends Bloc<EcommerceEvent, EcommerceState> {
     on<AddToCartEvent>(_onAddToCartEvent);
     on<UpdateCartQuantityEvent>(_onUpdateCartQuantityEvent);
     on<RemoveToCartEvent>(_onRemoveToCartEvent);
+    on<RemoveElementEvent>(_onRemoveElementEvent);
   }
 
   void _onLoadProductsEvent(
@@ -82,5 +85,32 @@ class EcommerceBloc extends Bloc<EcommerceEvent, EcommerceState> {
     }
 //
     emit(state.copyWith(cart: updateCart));
+  }
+
+  void _onRemoveElementEvent(
+      RemoveElementEvent event, Emitter<EcommerceState> emit) {
+    final product = state.cart.firstWhere(
+      (p) => p.id == event.product.id,
+    );
+    // final cart = state.cart;
+
+    // final exist = state.cart.firstWhere(
+    //   (p) => p.id == event.product.id,
+    //   orElse: () => event.product.copyWith(quantity: 0),
+    // );
+
+    final updateCart = state.cart;
+
+    updateCart.remove(product);
+
+    emit(state.copyWith(cart: updateCart));
+    // if (exist.quantity == 0) {
+    //   updateCart.remove(event.product);
+    // updateCart.add(
+    //   event.product.copyWith(quantity: 1),
+    // );
+    //}
+//
+    //emit(state.copyWith(cart: updateCart));
   }
 }
