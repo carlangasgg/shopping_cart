@@ -8,6 +8,17 @@ class CartBodyViewTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider.value(
+        value: context.read<EcommerceBloc>()..add(LoadCartItemsEvent()),
+        child: const Body());
+  }
+}
+
+class Body extends StatelessWidget {
+  const Body({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Expanded(
       child: BlocBuilder<EcommerceBloc, EcommerceState>(
